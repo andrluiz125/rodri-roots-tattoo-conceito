@@ -59,6 +59,74 @@ export default function Home() {
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, [menuOpen]);
 
+  useEffect(() => {
+    const revealItems = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    document.documentElement.classList.add("motion-ready");
+
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+      return () => document.documentElement.classList.remove("motion-ready");
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.14, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    revealItems.forEach((item) => observer.observe(item));
+
+    return () => {
+      observer.disconnect();
+      document.documentElement.classList.remove("motion-ready");
+    };
+  }, []);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const desktop = window.matchMedia("(min-width: 901px)");
+    const parallaxItems = Array.from(document.querySelectorAll<HTMLElement>("[data-parallax]"));
+    let frame = 0;
+
+    const updateParallax = () => {
+      frame = 0;
+      if (reduceMotion.matches || !desktop.matches) {
+        parallaxItems.forEach((item) => item.style.removeProperty("--parallax-y"));
+        return;
+      }
+
+      const viewportCenter = window.innerHeight / 2;
+      parallaxItems.forEach((item) => {
+        const bounds = item.getBoundingClientRect();
+        const itemCenter = bounds.top + bounds.height / 2;
+        const offset = Math.max(-26, Math.min(26, (viewportCenter - itemCenter) * 0.035));
+        item.style.setProperty("--parallax-y", `${offset.toFixed(1)}px`);
+      });
+    };
+
+    const requestUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateParallax);
+    };
+
+    updateParallax();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+
+    return () => {
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      if (frame) window.cancelAnimationFrame(frame);
+      parallaxItems.forEach((item) => item.style.removeProperty("--parallax-y"));
+    };
+  }, []);
+
   const filteredWorks = useMemo(
     () => filter === "Todos" ? works : works.filter((work) => work.type === filter),
     [filter],
@@ -113,6 +181,7 @@ export default function Home() {
       </nav>
 
       <section className="hero" id="inicio">
+        <div className="hero-media" aria-hidden="true" />
         <div className="hero-vignette" />
         <div className="hero-copy">
           <div className="eyebrow"><span /> Tattoo autoral · São Paulo</div>
@@ -132,12 +201,12 @@ export default function Home() {
       </section>
 
       <section className="manifesto" aria-label="Posicionamento">
-        <div className="section-kicker dark"><span>01</span> O que permanece</div>
-        <div className="manifesto-heading">
+        <div className="section-kicker dark" data-reveal><span>01</span> O que permanece</div>
+        <div className="manifesto-heading" data-reveal>
           <p>Mais que tinta.</p>
           <h2>Uma experiência feita para<br />você carregar com orgulho.</h2>
         </div>
-        <div className="manifesto-body">
+        <div className="manifesto-body reveal-delay-1" data-reveal>
           <p>Cada projeto começa com uma conversa. Antes do traço, vêm a escuta, a intenção e o cuidado para transformar sua referência em algo verdadeiramente seu.</p>
           <div className="preview-grid">
             <article><strong>01</strong><span>Escuta<br />verdadeira</span></article>
@@ -148,22 +217,22 @@ export default function Home() {
       </section>
 
       <section className="portfolio-section" id="portfolio">
-        <div className="section-topline">
+        <div className="section-topline" data-reveal>
           <div className="section-kicker"><span>02</span> Trabalhos selecionados</div>
           <p>Imagens conceituais para demonstração</p>
         </div>
-        <div className="portfolio-heading">
+        <div className="portfolio-heading" data-reveal>
           <h2>Histórias que<br /><em>ganharam forma.</em></h2>
           <p>Uma seleção para visualizar como projetos autorais, coberturas e trabalhos clássicos podem ganhar contexto e valor dentro do site.</p>
         </div>
 
-        <div className="portfolio-filters" role="group" aria-label="Filtrar trabalhos">
+        <div className="portfolio-filters reveal-delay-1" role="group" aria-label="Filtrar trabalhos" data-reveal>
           {["Todos", "Autoral", "Tradicional", "Cobertura", "Processo"].map((item) => (
             <button className={filter === item ? "active" : ""} onClick={() => setFilter(item)} key={item}>{item}</button>
           ))}
         </div>
 
-        <div className="work-grid">
+        <div className="work-grid reveal-scale" data-reveal>
           {filteredWorks.map((work, index) => (
             <button className={`work-card card-${index + 1}`} onClick={() => setSelectedWork(work)} key={work.title}>
               <span className="work-image" style={{ backgroundImage: `url(${work.image})`, backgroundPosition: work.position }} />
@@ -177,10 +246,10 @@ export default function Home() {
       </section>
 
       <section className="about-section" id="sobre">
-        <div className="about-image" role="img" aria-label="Interior conceitual do estúdio de tatuagem">
+        <div className="about-image reveal-left" role="img" aria-label="Interior conceitual do estúdio de tatuagem" data-reveal data-parallax>
           <div className="about-badge"><span>DESDE</span><strong>20<span>XX</span></strong><small>Dado a confirmar</small></div>
         </div>
-        <div className="about-copy">
+        <div className="about-copy" data-reveal>
           <div className="section-kicker"><span>03</span> Por trás do traço</div>
           <p className="script-note">Prazer, Rodrigo.</p>
           <h2>Arte com raiz.<br />Técnica com <em>propósito.</em></h2>
@@ -196,15 +265,15 @@ export default function Home() {
       </section>
 
       <section className="specialties-section">
-        <div className="section-topline light">
+        <div className="section-topline light" data-reveal>
           <div className="section-kicker dark"><span>04</span> Possibilidades</div>
           <p>O estilo certo começa na sua intenção</p>
         </div>
-        <div className="specialty-intro">
+        <div className="specialty-intro" data-reveal>
           <h2>Do primeiro traço<br />ao projeto <em>completo.</em></h2>
           <p>Uma estrutura de serviços que ajuda o visitante a reconhecer sua necessidade e chegar ao orçamento com mais clareza.</p>
         </div>
-        <div className="specialty-list">
+        <div className="specialty-list reveal-delay-1" data-reveal>
           {[
             ["01", "Projetos autorais", "Da referência inicial ao desenho criado para encaixar no seu corpo."],
             ["02", "Coberturas", "Avaliação técnica para transformar o antigo em um novo começo."],
@@ -217,11 +286,11 @@ export default function Home() {
       </section>
 
       <section className="process-section" id="processo">
-        <div className="process-visual">
+        <div className="process-visual reveal-left" data-reveal data-parallax>
           <span className="vertical-label">DO PAPEL À PELE</span>
           <div className="film-control"><button aria-label="Reproduzir filme conceitual" onClick={demoContact}>▶</button><span>Filme manifesto<br /><small>Conceito para Veo 3 · 00:24</small></span></div>
         </div>
-        <div className="process-copy">
+        <div className="process-copy" data-reveal>
           <div className="section-kicker"><span>05</span> Como funciona</div>
           <h2>Você traz a ideia.<br />A gente constrói<br /><em>o caminho.</em></h2>
           <div className="steps">
@@ -238,7 +307,7 @@ export default function Home() {
       </section>
 
       <section className="trust-section">
-        <div className="trust-copy">
+        <div className="trust-copy" data-reveal>
           <div className="section-kicker"><span>06</span> Experiência & cuidado</div>
           <h2>O resultado importa.<br /><em>Como você se sente</em><br />também.</h2>
           <p>Do ambiente preparado ao acompanhamento pós-sessão, cada etapa existe para tornar sua experiência segura, tranquila e memorável.</p>
@@ -246,22 +315,22 @@ export default function Home() {
             <span>Materiais preparados</span><span>Atendimento individual</span><span>Orientação pós-sessão</span><span>Ambiente organizado</span>
           </div>
         </div>
-        <div className="trust-image" role="img" aria-label="Processo profissional de tatuagem"><span>PRECISÃO<br />EM CADA<br />DETALHE</span></div>
+        <div className="trust-image reveal-scale" role="img" aria-label="Processo profissional de tatuagem" data-reveal data-parallax><span>PRECISÃO<br />EM CADA<br />DETALHE</span></div>
       </section>
 
       <section className="testimonial-section">
-        <div className="quote-mark">“</div>
-        <blockquote>“Eu cheguei com uma ideia solta e saí com algo que parecia ter sido feito para mim desde o começo.”</blockquote>
-        <div className="quote-author"><span>Cliente conceitual</span><small>Depoimento ilustrativo · Projeto personalizado</small></div>
+        <div className="quote-mark" data-reveal>“</div>
+        <blockquote data-reveal>“Eu cheguei com uma ideia solta e saí com algo que parecia ter sido feito para mim desde o começo.”</blockquote>
+        <div className="quote-author reveal-delay-1" data-reveal><span>Cliente conceitual</span><small>Depoimento ilustrativo · Projeto personalizado</small></div>
       </section>
 
       <section className="faq-section" id="faq">
-        <div className="faq-heading">
+        <div className="faq-heading" data-reveal>
           <div className="section-kicker dark"><span>07</span> Antes de marcar</div>
           <h2>Suas dúvidas,<br /><em>sem rodeios.</em></h2>
           <p>Transparência também faz parte de uma boa experiência.</p>
         </div>
-        <div className="faq-list">
+        <div className="faq-list reveal-delay-1" data-reveal>
           {faqs.map(([question, answer], index) => (
             <details key={question} open={index === 0}>
               <summary><span>0{index + 1}</span><strong>{question}</strong><i>+</i></summary>
@@ -273,7 +342,7 @@ export default function Home() {
 
       <section className="contact-section" id="orcamento">
         <div className="contact-art" />
-        <div className="contact-inner">
+        <div className="contact-inner reveal-scale" data-reveal>
           <div className="eyebrow"><span /> Sua próxima história começa aqui</div>
           <h2>Tem uma ideia<br />na cabeça?</h2>
           <p>Conte o que você imaginou. O primeiro passo não é ter tudo pronto — é começar a conversa.</p>
