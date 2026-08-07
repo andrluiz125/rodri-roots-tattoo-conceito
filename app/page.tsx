@@ -207,7 +207,12 @@ export default function Home() {
         <div className="section-kicker dark" data-reveal><span>01</span> O que permanece</div>
         <div className="manifesto-heading" data-reveal>
           <p>Mais que tinta.</p>
-          <h2>Uma experiência feita para<br />você carregar com orgulho.</h2>
+          <h2>
+            <span>Uma experiência</span>
+            <span>feita para</span>
+            <span>você carregar</span>
+            <span>com orgulho.</span>
+          </h2>
         </div>
         <div className="manifesto-body reveal-delay-1" data-reveal>
           <p>Cada projeto começa com uma conversa. Antes do traço, vêm a escuta, a intenção e o cuidado para transformar sua referência em algo verdadeiramente seu.</p>
