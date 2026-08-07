@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 
 const navItems = [
@@ -135,14 +136,16 @@ export default function Home() {
   const demoContact = () => setToast(true);
 
   return (
-    <main>
+    <>
+      <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
+      <main id="conteudo" tabIndex={-1}>
       <div className="concept-ribbon">
         Projeto conceito <span /> Conteúdo demonstrativo
       </div>
 
       <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
         <a className="brand-link" href="#inicio" aria-label="Rodri Roots Tattoo — início">
-          <img className="brand-logo header-logo" src="/images/logo-rodri-roots.png" alt="Rodri Roots Tattoo" width="600" height="307" />
+          <Image className="brand-logo header-logo" src="/images/logo-rodri-roots.webp" alt="Rodri Roots Tattoo" width={1376} height={768} priority sizes="(max-width: 900px) 124px, 164px" />
         </a>
 
         <nav className="desktop-nav" aria-label="Navegação principal">
@@ -197,7 +200,7 @@ export default function Home() {
           <div><small>Atendimento</small><strong>Com hora marcada</strong></div>
           <div><small>Projetos</small><strong>Autorais & personalizados</strong></div>
         </div>
-        <div className="scroll-cue"><span>SCROLL</span><i /></div>
+        <div className="scroll-cue" aria-hidden="true"><span>SCROLL</span><i /></div>
       </section>
 
       <section className="manifesto" aria-label="Posicionamento">
@@ -352,13 +355,13 @@ export default function Home() {
       </section>
 
       <footer>
-        <div className="footer-brand"><img className="brand-logo footer-logo" src="/images/logo-rodri-roots.png" alt="Rodri Roots Tattoo" width="600" height="307" /><p>Cada tatuagem conta uma história.<br />Qual será a próxima a marcar a sua?</p></div>
+        <div className="footer-brand"><Image className="brand-logo footer-logo" src="/images/logo-rodri-roots.webp" alt="Rodri Roots Tattoo" width={1376} height={768} sizes="(max-width: 900px) 250px, 270px" /><p>Cada tatuagem conta uma história.<br />Qual será a próxima a marcar a sua?</p></div>
         <div className="footer-col"><small>Navegue</small>{navItems.map(([label, href]) => <a href={href} key={href}>{label}</a>)}</div>
-        <div className="footer-col"><small>Contato conceitual</small><span>São Paulo · SP</span><span>(11) 9XXXX-XXXX</span><span>@rodri.roots.tattoo</span></div>
+        <div className="footer-col"><small>Contato conceitual</small><span>São Paulo · SP</span><span>(11) 9XXXX-XXXX</span><a href="https://www.instagram.com/rodri.roots.tattoo/" target="_blank" rel="noreferrer">@rodri.roots.tattoo ↗</a></div>
         <div className="footer-bottom"><span>© 2026 Rodri Roots Tattoo — Projeto conceito</span><span>Informações sujeitas à validação</span></div>
       </footer>
 
-      <button className="floating-contact" onClick={demoContact} aria-label="Abrir contato demonstrativo"><span>✦</span><small>ORÇAMENTO</small></button>
+      <button className={`floating-contact ${scrolled ? "is-visible" : ""}`} onClick={demoContact} aria-label="Abrir contato demonstrativo"><span>✦</span><small>ORÇAMENTO</small></button>
 
       {selectedWork && (
         <div className="work-modal" role="dialog" aria-modal="true" aria-label={selectedWork.title} onClick={() => setSelectedWork(null)}>
@@ -371,6 +374,7 @@ export default function Home() {
       <div className={`demo-toast ${toast ? "show" : ""}`} role="status">
         <span>✦</span><div><strong>Interação demonstrativa</strong><p>Na versão final, este botão abrirá o WhatsApp do estúdio.</p></div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }
