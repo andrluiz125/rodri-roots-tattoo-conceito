@@ -205,6 +205,14 @@ export default function Home() {
 
       <section className="manifesto" aria-label="Posicionamento">
         <div className="section-kicker dark" data-reveal><span>01</span> O que permanece</div>
+        <div className="manifesto-visual reveal-scale" aria-hidden="true" data-reveal>
+          <Image
+            src="/images/consultation.webp"
+            alt=""
+            fill
+            sizes="(max-width: 900px) 1px, 50vw"
+          />
+        </div>
         <div className="manifesto-heading" data-reveal>
           <p>Mais que tinta.</p>
           <h2>

@@ -191,7 +191,26 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .section-topline.light { border-color: rgba(13,13,12,.15); }
 .section-topline.light > p { color: rgba(13,13,12,.7); }
 
-.manifesto { min-height: 92vh; padding: 120px clamp(24px, 8vw, 130px); background: var(--paper); color: var(--ink); }
+.manifesto { position: relative; isolation: isolate; overflow: hidden; min-height: 92vh; padding: 120px clamp(24px, 8vw, 130px); background: var(--paper); color: var(--ink); }
+.manifesto > .section-kicker, .manifesto-heading, .manifesto-body { position: relative; z-index: 2; }
+.manifesto-visual {
+  position: absolute;
+  z-index: 0;
+  top: 145px;
+  right: clamp(30px, 6vw, 100px);
+  width: min(50vw, 760px);
+  height: clamp(340px, 31vw, 470px);
+  pointer-events: none;
+  opacity: .25;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(ellipse 76% 72% at center, #000 25%, rgba(0,0,0,.92) 48%, rgba(0,0,0,.36) 72%, transparent 100%);
+  mask-image: radial-gradient(ellipse 76% 72% at center, #000 25%, rgba(0,0,0,.92) 48%, rgba(0,0,0,.36) 72%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+.manifesto-visual img { object-fit: cover; object-position: center; filter: grayscale(1) contrast(.92) brightness(1.04); }
 .manifesto-heading { margin-top: 74px; }
 .manifesto-heading > p { margin: 0 0 20px; color: #5d5448; font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 .manifesto-heading h2 { margin: 0; width: fit-content; max-width: 100%; font-family: var(--font-display), Georgia, "Times New Roman", serif; font-size: clamp(52px, 4.8vw, 76px); font-weight: 400; line-height: .98; letter-spacing: -.045em; }
@@ -403,6 +422,7 @@ footer { padding: 75px clamp(24px, 6vw, 92px) 28px; display: grid; grid-template
   .scroll-cue { display: none; }
   .section-topline > p { display: none; }
   .manifesto, .portfolio-section, .specialties-section, .faq-section { padding: 88px 24px; }
+  .manifesto-visual { display: none; }
   .manifesto-heading { margin-top: 55px; }
   .manifesto-heading h2, .portfolio-heading h2, .specialty-intro h2, .about-copy h2, .process-copy h2, .trust-copy h2, .faq-heading h2 { font-size: clamp(43px, 12vw, 58px); line-height: 1; }
   .manifesto-body { width: 100%; margin-top: 45px; grid-template-columns: 1fr; gap: 45px; }
