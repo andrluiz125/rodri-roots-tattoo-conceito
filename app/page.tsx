@@ -18,11 +18,19 @@ const works = [
   { title: "Clássico, só seu", type: "Tradicional", meta: "Antebraço · 1 sessão", image: "/images/studio.webp", position: "72% center" },
 ];
 
+const heroProofImages = [
+  { src: "/images/portfolio.webp", position: "center" },
+  { src: "/images/process.webp", position: "72% center" },
+  { src: "/images/consultation.webp", position: "center" },
+  { src: "/images/hero.webp", position: "82% center" },
+  { src: "/images/studio.webp", position: "72% center" },
+];
+
 const faqs = [
   ["Como é calculado o valor da tatuagem?", "O orçamento considera tamanho, região do corpo, nível de detalhe e tempo estimado de execução. Envie sua ideia e referências para uma avaliação personalizada."],
   ["Preciso chegar com o desenho pronto?", "Não. Referências ajudam a entender o caminho, mas o desenho é construído e adaptado para o seu corpo, mantendo o projeto original e exclusivo."],
   ["Você faz cobertura de tatuagem?", "Sim, após avaliar uma foto nítida da tatuagem atual, o tamanho, a pigmentação e as possibilidades técnicas de cobertura."],
-  ["Como funciona o agendamento?", "Após a aprovação do orçamento, um sinal reserva a data. Regras, prazos e disponibilidade são confirmados diretamente no atendimento."],
+  ["Como funciona o agendamento?", "Após a aprovação do orçamento, um sinal reserva a data. Regras, prazos e disponibilidade são confirmadas diretamente no atendimento."],
   ["Quais cuidados devo ter antes da sessão?", "Descanse bem, hidrate-se, alimente-se antes do horário e evite álcool. Orientações específicas são enviadas antes da sessão."],
 ];
 
@@ -193,6 +201,26 @@ export default function Home() {
           <div className="hero-actions">
             <a className="button button-gold" href="#orcamento">Contar minha ideia <span>↗</span></a>
             <a className="text-link" href="#portfolio">Explorar trabalhos <span>↓</span></a>
+          </div>
+        </div>
+
+        <div className="hero-social-proof" aria-label="Mais de 100 tatuagens realizadas aqui">
+          <div className="hero-proof-avatars" aria-hidden="true">
+            {heroProofImages.map((item, index) => (
+              <span
+                key={`${item.src}-${index}`}
+                className="hero-proof-avatar"
+                style={{
+                  backgroundImage: `url(${item.src})`,
+                  backgroundPosition: item.position,
+                  zIndex: index + 1,
+                }}
+              />
+            ))}
+          </div>
+          <div className="hero-proof-copy">
+            <strong>+100 TATUAGENS</strong>
+            <span>REALIZADAS AQUI!</span>
           </div>
         </div>
 
