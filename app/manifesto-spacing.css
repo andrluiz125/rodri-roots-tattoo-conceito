@@ -1,0 +1,60 @@
+.manifesto {
+  min-height: 640px;
+  padding-top: 92px;
+  padding-bottom: 92px;
+}
+
+.manifesto-heading {
+  margin-top: 68px;
+}
+
+.manifesto-body {
+  margin-top: 158px;
+}
+
+@media (max-width: 1180px) and (min-width: 901px) {
+  .manifesto {
+    min-height: 610px;
+    padding-top: 84px;
+    padding-bottom: 84px;
+  }
+
+  .manifesto-heading {
+    margin-top: 62px;
+  }
+
+  .manifesto-body {
+    margin-top: 124px;
+  }
+}
+
+@media (max-width: 900px) {
+  .manifesto {
+    min-height: auto;
+    padding-top: 108px;
+    padding-bottom: 108px;
+  }
+
+  .manifesto-heading {
+    margin-top: 62px;
+  }
+
+  .manifesto-body {
+    margin-top: 52px;
+  }
+}
+
+@media (max-width: 520px) {
+  .manifesto {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+
+  .manifesto-heading {
+    margin-top: 56px;
+  }
+
+  .manifesto-body {
+    margin-top: 48px;
+  }
+}
