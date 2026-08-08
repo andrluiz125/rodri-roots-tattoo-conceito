@@ -33,6 +33,73 @@
   bottom: 114px;
 }
 
+.hero-social-proof {
+  position: absolute;
+  z-index: 6;
+  right: clamp(24px, 5vw, 76px);
+  bottom: 202px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 17px;
+  pointer-events: none;
+}
+
+.hero-proof-avatars {
+  display: flex;
+  align-items: center;
+  padding: 7px 0;
+}
+
+.hero-proof-avatar {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  margin-left: -11px;
+  border: 1.5px solid #c99a5f;
+  border-radius: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .34);
+  cursor: pointer;
+  pointer-events: auto;
+  transform: translateZ(0);
+  transition: transform .28s cubic-bezier(.2, .75, .25, 1), box-shadow .28s ease, border-color .28s ease;
+}
+
+.hero-proof-avatar:first-child {
+  margin-left: 0;
+}
+
+.hero-proof-avatar:hover {
+  z-index: 30 !important;
+  transform: translateY(-5px) scale(1.18);
+  border-color: #e2bd84;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, .5), 0 0 0 3px rgba(201, 154, 95, .12);
+}
+
+.hero-proof-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 168px;
+  color: #e7e0d4;
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  line-height: 1.03;
+  text-align: left;
+  text-transform: uppercase;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .4);
+}
+
+.hero-proof-copy strong,
+.hero-proof-copy span {
+  display: block;
+  font-size: clamp(14px, 1vw, 17px);
+  font-weight: 650;
+  letter-spacing: .01em;
+}
+
 @keyframes rootsMarqueeLeft {
   from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(-50%, 0, 0); }
@@ -50,6 +117,29 @@
   .hero-meta {
     bottom: 118px;
   }
+
+  .hero-social-proof {
+    left: 24px;
+    right: auto;
+    bottom: 184px;
+    gap: 14px;
+  }
+
+  .hero-proof-avatar {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+    margin-left: -10px;
+  }
+
+  .hero-proof-copy {
+    min-width: 154px;
+  }
+
+  .hero-proof-copy strong,
+  .hero-proof-copy span {
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -63,11 +153,38 @@
   .hero-meta {
     bottom: 104px;
   }
+
+  .hero-social-proof {
+    left: 20px;
+    bottom: 164px;
+    gap: 11px;
+  }
+
+  .hero-proof-avatar {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+    margin-left: -9px;
+  }
+
+  .hero-proof-copy {
+    min-width: 140px;
+  }
+
+  .hero-proof-copy strong,
+  .hero-proof-copy span {
+    font-size: 12px;
+    line-height: 1.05;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero::after {
     animation: none !important;
     transform: none !important;
+  }
+
+  .hero-proof-avatar {
+    transition: none !important;
   }
 }
