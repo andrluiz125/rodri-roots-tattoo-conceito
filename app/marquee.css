@@ -73,11 +73,11 @@
 
 /* As provas sociais usam versões reduzidas pelo otimizador do Next.
    Evita baixar 5 imagens grandes do portfólio logo na primeira dobra. */
-.hero-proof-avatar:nth-child(1) { background-image: url("/_next/image?url=%2Fimages%2Fportfolio.webp&w=96&q=55") !important; }
-.hero-proof-avatar:nth-child(2) { background-image: url("/_next/image?url=%2Fimages%2Fprocess.webp&w=96&q=55") !important; }
-.hero-proof-avatar:nth-child(3) { background-image: url("/_next/image?url=%2Fimages%2Fconsultation.webp&w=96&q=55") !important; }
-.hero-proof-avatar:nth-child(4) { background-image: url("/_next/image?url=%2Fimages%2Fhero.webp&w=96&q=55") !important; }
-.hero-proof-avatar:nth-child(5) { background-image: url("/_next/image?url=%2Fimages%2Fstudio.webp&w=96&q=55") !important; }
+.hero-proof-avatar:nth-child(1) { background-image: url("/_next/image?url=%2Fimages%2Fportfolio.webp&w=96&q=75") !important; }
+.hero-proof-avatar:nth-child(2) { background-image: url("/_next/image?url=%2Fimages%2Fprocess.webp&w=96&q=75") !important; }
+.hero-proof-avatar:nth-child(3) { background-image: url("/_next/image?url=%2Fimages%2Fconsultation.webp&w=96&q=75") !important; }
+.hero-proof-avatar:nth-child(4) { background-image: url("/_next/image?url=%2Fimages%2Fhero.webp&w=96&q=75") !important; }
+.hero-proof-avatar:nth-child(5) { background-image: url("/_next/image?url=%2Fimages%2Fstudio.webp&w=96&q=75") !important; }
 
 .hero-proof-avatar:first-child {
   margin-left: 0;
