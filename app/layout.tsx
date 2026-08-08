@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import "./marquee.css";
+import "./manifesto-spacing.css";
 
 const inter = Inter({
   variable: "--font-body",
