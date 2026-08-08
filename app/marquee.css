@@ -1,0 +1,73 @@
+.hero::after {
+  content: "✦  LETTERING   ✦  COBERTURA   ✦  BLACKWORK   ✦  FINE LINE   ✦  ZONA LESTE — SP   ✦  REALISMO   ✦  LETTERING   ✦  COBERTURA   ✦  BLACKWORK   ✦  FINE LINE   ✦  ZONA LESTE — SP   ✦  REALISMO   ✦  LETTERING   ✦  COBERTURA   ✦  BLACKWORK   ✦  FINE LINE   ✦  ZONA LESTE — SP   ✦  REALISMO   ✦  LETTERING   ✦  COBERTURA   ✦  BLACKWORK   ✦  FINE LINE   ✦  ZONA LESTE — SP   ✦  REALISMO   ✦  LETTERING   ✦  COBERTURA   ✦  BLACKWORK   ✦  FINE LINE   ✦  ZONA LESTE — SP   ✦  REALISMO   ✦  LETTERING   ✦  COBERTURA   ✦  BLACKWORK   ✦  FINE LINE   ✦  ZONA LESTE — SP   ✦  REALISMO";
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  bottom: 0;
+  width: max-content;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  border-top: 1px solid rgba(183, 139, 81, .38);
+  border-bottom: 1px solid rgba(183, 139, 81, .28);
+  background: #100d09;
+  color: #c99a5f;
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  font-size: clamp(17px, 1.35vw, 22px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  will-change: transform;
+  animation: rootsMarqueeRight 36s linear infinite;
+}
+
+.hero-meta {
+  bottom: 108px;
+}
+
+.scroll-cue {
+  bottom: 94px;
+}
+
+@keyframes rootsMarqueeRight {
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+@media (max-width: 900px) {
+  .hero::after {
+    height: 58px;
+    padding-inline: 20px;
+    font-size: 16px;
+    letter-spacing: .05em;
+    animation-duration: 28s;
+  }
+
+  .hero-meta {
+    bottom: 100px;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero::after {
+    height: 54px;
+    padding-inline: 18px;
+    font-size: 15px;
+    animation-duration: 25s;
+  }
+
+  .hero-meta {
+    bottom: 88px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::after {
+    animation: none !important;
+    transform: none !important;
+  }
+}
