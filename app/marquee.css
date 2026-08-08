@@ -71,6 +71,14 @@
   transition: transform .28s cubic-bezier(.2, .75, .25, 1), box-shadow .28s ease, border-color .28s ease;
 }
 
+/* As provas sociais usam versões reduzidas pelo otimizador do Next.
+   Evita baixar 5 imagens grandes do portfólio logo na primeira dobra. */
+.hero-proof-avatar:nth-child(1) { background-image: url("/_next/image?url=%2Fimages%2Fportfolio.webp&w=96&q=55") !important; }
+.hero-proof-avatar:nth-child(2) { background-image: url("/_next/image?url=%2Fimages%2Fprocess.webp&w=96&q=55") !important; }
+.hero-proof-avatar:nth-child(3) { background-image: url("/_next/image?url=%2Fimages%2Fconsultation.webp&w=96&q=55") !important; }
+.hero-proof-avatar:nth-child(4) { background-image: url("/_next/image?url=%2Fimages%2Fhero.webp&w=96&q=55") !important; }
+.hero-proof-avatar:nth-child(5) { background-image: url("/_next/image?url=%2Fimages%2Fstudio.webp&w=96&q=55") !important; }
+
 .hero-proof-avatar:first-child {
   margin-left: 0;
 }
@@ -133,6 +141,24 @@
     padding-bottom: 250px;
   }
 
+  /* No mobile o header já é praticamente opaco; remover blur reduz custo de composição. */
+  .site-header,
+  .site-header.is-scrolled {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* O grão e o drift são sutis visualmente, mas criam uma camada grande para rasterização. */
+  .hero::before {
+    display: none;
+  }
+
+  .hero-media {
+    animation: none;
+    will-change: auto;
+    transform: none;
+  }
+
   .hero-meta {
     bottom: 112px;
   }
@@ -175,7 +201,33 @@
   }
 
   .hero-meta {
-    bottom: 108px;
+    left: 20px;
+    right: 20px;
+    bottom: 84px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    justify-content: initial;
+  }
+
+  .hero-meta div {
+    min-width: 0;
+    padding-left: 11px;
+  }
+
+  .hero-meta div:last-child {
+    display: flex;
+  }
+
+  .hero-meta small {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  .hero-meta strong {
+    font-size: 11px;
+    line-height: 1.35;
   }
 
   .hero-social-proof {
