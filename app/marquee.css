@@ -1,67 +1,67 @@
 .hero::after {
-  content: "✦  LETTERING   ✦  COBERTURA   ✦  BLACKWORK   ✦  FINE LINE   ✦  ZONA LESTE — SP   ✦  REALISMO   ✦  LETTERING   ✦  COBERTURA   ✦  BLACKWORK   ✦  FINE LINE   ✦  ZONA LESTE — SP   ✦  REALISMO   ✦  LETTERING   ✦  COBERTURA   ✦  BLACKWORK   ✦  FINE LINE   ✦  ZONA LESTE — SP   ✦  REALISMO   ✦  LETTERING   ✦  COBERTURA   ✦  BLACKWORK   ✦  FINE LINE   ✦  ZONA LESTE — SP   ✦  REALISMO   ✦  LETTERING   ✦  COBERTURA   ✦  BLACKWORK   ✦  FINE LINE   ✦  ZONA LESTE — SP   ✦  REALISMO   ✦  LETTERING   ✦  COBERTURA   ✦  BLACKWORK   ✦  FINE LINE   ✦  ZONA LESTE — SP   ✦  REALISMO";
+  content: "✦  LETTERING  ✦  COBERTURA  ✦  BLACKWORK  ✦  FINE LINE  ✦  ZONA LESTE — SP  ✦  REALISMO  ✦  LETTERING  ✦  COBERTURA  ✦  BLACKWORK  ✦  FINE LINE  ✦  ZONA LESTE — SP  ✦  REALISMO  ✦  LETTERING  ✦  COBERTURA  ✦  BLACKWORK  ✦  FINE LINE  ✦  ZONA LESTE — SP  ✦  REALISMO  ✦  LETTERING  ✦  COBERTURA  ✦  BLACKWORK  ✦  FINE LINE  ✦  ZONA LESTE — SP  ✦  REALISMO  ✦  LETTERING  ✦  COBERTURA  ✦  BLACKWORK  ✦  FINE LINE  ✦  ZONA LESTE — SP  ✦  REALISMO  ✦  LETTERING  ✦  COBERTURA  ✦  BLACKWORK  ✦  FINE LINE  ✦  ZONA LESTE — SP  ✦  REALISMO";
   position: absolute;
   z-index: 5;
   left: 0;
   bottom: 0;
   width: max-content;
-  height: 66px;
+  height: 86px;
   display: flex;
   align-items: center;
-  padding: 0 28px;
+  padding: 0 40px;
   border-top: 1px solid rgba(183, 139, 81, .38);
   border-bottom: 1px solid rgba(183, 139, 81, .28);
   background: #100d09;
   color: #c99a5f;
   font-family: var(--font-display), Georgia, "Times New Roman", serif;
-  font-size: clamp(17px, 1.35vw, 22px);
+  font-size: clamp(18px, 1.45vw, 24px);
   font-weight: 500;
   line-height: 1;
-  letter-spacing: .055em;
+  letter-spacing: .06em;
   text-transform: uppercase;
-  white-space: nowrap;
+  white-space: pre;
   pointer-events: none;
   will-change: transform;
-  animation: rootsMarqueeRight 36s linear infinite;
+  animation: rootsMarqueeLeft 60s linear infinite;
 }
 
 .hero-meta {
-  bottom: 108px;
+  bottom: 128px;
 }
 
 .scroll-cue {
-  bottom: 94px;
+  bottom: 114px;
 }
 
-@keyframes rootsMarqueeRight {
-  from { transform: translate3d(-50%, 0, 0); }
-  to { transform: translate3d(0, 0, 0); }
+@keyframes rootsMarqueeLeft {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 
 @media (max-width: 900px) {
   .hero::after {
-    height: 58px;
-    padding-inline: 20px;
-    font-size: 16px;
-    letter-spacing: .05em;
-    animation-duration: 28s;
+    height: 74px;
+    padding-inline: 28px;
+    font-size: 17px;
+    letter-spacing: .055em;
+    animation-duration: 50s;
   }
 
   .hero-meta {
-    bottom: 100px;
+    bottom: 118px;
   }
 }
 
 @media (max-width: 520px) {
   .hero::after {
-    height: 54px;
-    padding-inline: 18px;
-    font-size: 15px;
-    animation-duration: 25s;
+    height: 68px;
+    padding-inline: 24px;
+    font-size: 16px;
+    animation-duration: 46s;
   }
 
   .hero-meta {
-    bottom: 88px;
+    bottom: 104px;
   }
 }
 
