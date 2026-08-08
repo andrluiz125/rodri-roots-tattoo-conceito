@@ -128,14 +128,19 @@
     animation-duration: 50s;
   }
 
+  .hero {
+    min-height: max(900px, 100svh);
+    padding-bottom: 250px;
+  }
+
   .hero-meta {
-    bottom: 118px;
+    bottom: 112px;
   }
 
   .hero-social-proof {
     left: 24px;
     right: auto;
-    bottom: 184px;
+    bottom: 178px;
     gap: 14px;
   }
 
@@ -164,13 +169,18 @@
     animation-duration: 46s;
   }
 
+  .hero {
+    min-height: max(900px, 100svh);
+    padding-bottom: 252px;
+  }
+
   .hero-meta {
-    bottom: 104px;
+    bottom: 108px;
   }
 
   .hero-social-proof {
     left: 20px;
-    bottom: 164px;
+    bottom: 174px;
     gap: 11px;
   }
 
