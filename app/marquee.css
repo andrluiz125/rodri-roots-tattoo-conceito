@@ -159,15 +159,44 @@
     transform: none;
   }
 
+  /* Conteúdo crítico do Hero deve pintar imediatamente no mobile.
+     Evita que delays de entrada sejam contabilizados no LCP e no Speed Index. */
+  .hero .eyebrow,
+  .hero h1,
+  .hero-copy > p,
+  .hero-actions,
   .hero-meta {
-    bottom: 112px;
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 
+  /* Mantém a prova social suave, porém conclui a animação bem antes. */
   .hero-social-proof {
     left: 24px;
     right: auto;
     bottom: 178px;
     gap: 14px;
+    animation-duration: .55s;
+    animation-delay: .18s;
+  }
+
+  /* Adia pintura das seções fora da primeira dobra sem alterar seu layout ao chegar nelas. */
+  .manifesto,
+  .portfolio-section,
+  .about-section,
+  .specialties-section,
+  .process-section,
+  .trust-section,
+  .faq-section,
+  .contact-section,
+  footer {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
+
+  .hero-meta {
+    bottom: 112px;
   }
 
   .hero-proof-avatar {
