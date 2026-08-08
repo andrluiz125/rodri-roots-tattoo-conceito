@@ -103,27 +103,6 @@
   letter-spacing: .01em;
 }
 
-/* Logo premium vetorial: substitui visualmente o WebP corrompido sem alterar a estrutura do layout. */
-.brand-link {
-  background: url("/images/logo-rodri-roots-premium.svg") center / contain no-repeat;
-}
-
-.header-logo {
-  opacity: 0;
-}
-
-.footer-logo {
-  display: none !important;
-}
-
-.footer-brand::before {
-  content: "";
-  display: block;
-  width: min(270px, 72vw);
-  aspect-ratio: 700 / 391;
-  background: url("/images/logo-rodri-roots-premium.svg") center / contain no-repeat;
-}
-
 @keyframes rootsMarqueeLeft {
   from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(-50%, 0, 0); }
